@@ -12,6 +12,7 @@ const users = new mongoose.Schema({
   password: { type: String, required: true},
   first_name: { type: String },
   last_name: { type: String },
+  profileImgUrl: {type: String},
   email: {type: String, validate: [ isEmail, 'invalid email' ]},
   role: { type: String, required: true, default: 'user', enum: ['admin', 'user']}
 });
@@ -27,20 +28,6 @@ users.pre('findOneAndUpdate', async function(){
   this._update.password = await bcrypt.hash(this._update.password, 5);
 });
 
-
-// users.statics.authenticateBasic = function(username, password) {
-//   let query = { username };
-//   return this.findOne(query)
-//     .then( user => user && user.comparePassword(password))
-//     .catch(err=>console.error(err));
-// };
-
-
-// users.methods.comparePassword = function(plainPassword) {
-//   return bcrypt.compare(plainPassword, this.password)
-//     .then(valid => valid ? this : null)
-//     .catch(err=>console.error(err));
-// };
 
 users.statics.basicValidation = async function(username, password) {
   let query = { username };

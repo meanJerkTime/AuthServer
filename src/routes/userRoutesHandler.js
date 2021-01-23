@@ -35,7 +35,12 @@ async function signup (req, res, next){
 
 async function signin (req, res, next){
   res.cookie('auth', req.token);
-  res.send({token: req.token});
+  const user = {
+    _id: req.user._id,
+    username: req.user.username,
+    profileImgUrl: req.user.profileImgUrl,
+  }
+  res.send({token: req.token, user});
 }
 
 
