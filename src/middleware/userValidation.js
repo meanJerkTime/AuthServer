@@ -6,13 +6,6 @@ module.exports = async (req, res, next)=>{
   let userValidationErr = {message_spec: 'You can NOT modify other user\'s profile', statusCode:401, statusMessage:'user validation error'};
   let nonExistErr = {message_spec: 'The user does not exist', statusCode:401, statusMessage:'non existing user'};
 
-  // let model;
-  // if (req.url.includes('/listings')){
-  //   model = Listing;
-  // } else if (req.url.includes('/users')){
-  //   model = userModel;
-  // }
-
   if (req.user.role==='admin'){
     //Admin can do all kinds of modification, but got to make sure the user DO exist first.
     if (req.method !== 'DELETE'){

@@ -11,8 +11,11 @@ const basicAuth = require('../middleware/basicAuth');
 const bearerAuth = require('../middleware/bearer.js');
 const adminValidation = require('../middleware/adminValidation.js');
 const userValidation = require('../middleware/userValidation.js');
+const roleValidation = require('../middleware/roleValidation.js');
 
-router.post('/signup', signup);
+router.post('/signup', roleValidation, signup);// regular user sign up, can not have role key other than 'user'. can be blank;
+
+router.post('/adminsignup', bearerAuth, adminValidation, signup); // admin signup, admin can be only added by another admin.
 
 router.post('/signin', basicAuth, signin);
 
