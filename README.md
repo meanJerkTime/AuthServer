@@ -2,6 +2,8 @@
 
 ## Routes
 
+deployed URL <https://munchkin-auth.herokuapp.com>
+
 1. POST  /signup  (only username and password is required, user role will be default to 'user', will block user from sign up as admin)
 
 2. POST  /adminsignup  (bearer token required. username, password and role=admin are required, admin can only be added by another admin)
